@@ -5,6 +5,32 @@ body {
   place-content: center;
 }
 
+.btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn:hover .letter {
+  transform: translateY(110%);
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.letter {
+  color: black;
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.letter:before {
+  display: inline-block;
+  content: attr(data-letter);
+  transform: translateY(-110%);
+  position: absolute;
+}
+
 .toast-container {
   padding: 1rem;
   position: fixed;
@@ -30,7 +56,6 @@ body {
   font-weight: 500;
   display: flex;
   align-items: center;
-  gap: 0.75rem;
   min-width: 200px;
   backdrop-filter: blur(8px);
   transform: translateY(100%);
@@ -45,11 +70,10 @@ body {
   background-color: #dc2626;
 }
 
-.toast[data-mounted='true'] {
+.toast[data-mounted="true"] {
   transition: transform 0.3s ease, opacity 0.3s ease;
   opacity: 1;
-  transform: translateY(calc(var(--index) * -25%))
-    scale(calc(1 - var(--index) * 0.05));
+  transform: translateY(calc(var(--index) * -110%));
 }
 
 .error {

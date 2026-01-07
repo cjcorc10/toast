@@ -3,12 +3,12 @@ const ToastService = (() => {
   const toasts = [];
 
   function init() {
-    container = document.getElementById('toast-container');
+    container = document.getElementById("toast-container");
 
     if (!container) {
-      container = document.createElement('div');
-      container.id = 'toast-container';
-      container.className = 'toast-container';
+      container = document.createElement("div");
+      container.id = "toast-container";
+      container.className = "toast-container";
       document.body.appendChild(container);
     }
 
@@ -25,22 +25,22 @@ const ToastService = (() => {
   }
   function updateIndices(toasts) {
     toasts.forEach((toast, index) => {
-      toast.style.setProperty('--index', toasts.length - index - 1);
+      toast.style.setProperty("--index", toasts.length - index - 1);
     });
   }
 
-  function create(message = 'Success', variant) {
+  function create(message = "Success", variant) {
     if (!container) {
       init();
     }
-    const toast = document.createElement('article');
+    const toast = document.createElement("article");
     let className;
     switch (variant) {
-      case 'error':
-        className = 'toast error show-toast';
+      case "error":
+        className = "toast error show-toast";
         break;
       default:
-        className = 'toast show-toast';
+        className = "toast show-toast";
     }
     toast.className = className;
     toast.innerHTML = message;
@@ -50,20 +50,20 @@ const ToastService = (() => {
     //     `;
     // const closeButton = toast.querySelector('.close');
     // closeButton.addEventListener('click', () => hide(toast));
-    toast.addEventListener('click', () => hide(toast));
+    toast.addEventListener("click", () => hide(toast));
     container.appendChild(toast);
     toast.offsetHeight; // hacky shit to force browser to update layout so that mounted data attribute can be used to transform
-    toast.dataset.mounted = 'true';
+    toast.dataset.mounted = "true";
     toasts.push(toast);
     updateIndices(toasts);
     return toast;
   }
 
   function hide(toast) {
-    toast.classList.remove('show-toast');
-    toast.classList.add('remove-toast');
+    toast.classList.remove("show-toast");
+    toast.classList.add("remove-toast");
     toast.addEventListener(
-      'animationend',
+      "animationend",
       () => {
         removeToast(toast);
       },
