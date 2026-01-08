@@ -7,28 +7,45 @@ body {
 
 .btn {
   position: relative;
-  overflow: hidden;
+  margin: 1.5rem;
+  border: none;
+  transform-style: preserve-3d;
+  padding: 0.75rem 1rem;
+  border-radius: 9999px;
+  transition: all 0.2s ease;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.3),
+    0 4px 6px -4px rgb(0 0 0 / 0.3);
 }
-
-.btn:hover .letter {
-  transform: translateY(110%);
+.btn:hover {
+  cursor: pointer;
+  background-color: #d1d5db;
 }
 
 .btn:active {
-  transform: scale(0.98);
+  transform: scale(0.97);
 }
 
 .letter {
+  font-size: 1.25rem;
+  text-transform: uppercase;
   color: black;
   display: inline-block;
-  transition: transform 0.2s ease;
+  animation: orbit 3s linear infinite;
+  animation-delay: calc(var(--index) * 0.1s);
 }
 
-.letter:before {
-  display: inline-block;
-  content: attr(data-letter);
-  transform: translateY(-110%);
-  position: absolute;
+#error-btn > .letter {
+  animation: orbit 3s linear infinite reverse;
+  animation-delay: calc(var(--index) * 0.1s);
+}
+
+@keyframes orbit {
+  from {
+    transform: rotateX(0deg) translateZ(40px) rotateX(0deg);
+  }
+  to {
+    transform: rotateX(360deg) translateZ(40px) rotateX(-360deg);
+  }
 }
 
 .toast-container {
